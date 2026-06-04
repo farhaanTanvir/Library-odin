@@ -20,6 +20,24 @@ addBookToLibrary("The Hunger Games", "Suzanne Collins", "Scholastic", "374", "dy
 addBookToLibrary("Dune", "Frank Herbert", "Chilton Books", "617", "sci-fi");
 addBookToLibrary("The Da Vinci Code", "Dan Brown", "Doubleday", "454", "thriller");
 addBookToLibrary("And Then There Were None", "Agatha Christie", "Collins Crime Club", "272", "mystery");
+addBookToLibrary("The Fault in Our Stars", "John Green", "Dutton Books", "313", "young-adult");
+addBookToLibrary("The Great Gatsby", "F. Scott Fitzgerald", "Charles Scribner's Sons", "180", "classic");
+addBookToLibrary("Sapiens", "Yuval Noah Harari", "Harper", "443", "history");
+addBookToLibrary("A Brief History of Time", "Stephen Hawking", "Bantam Books", "212", "science");
 
 
 console.log(myLibrary);
+
+const container = document.getElementById('container');
+
+myLibrary.forEach((obj) => {
+    const string = `<div class="card">
+        <p>${obj.title}</p>
+        <p>Author: ${obj.author}</p>
+        <p>Publisher: ${obj.publisher}</p>
+        <p>Page Count: ${obj.pageCount}</p>
+        <p>Genre: ${obj.genre}</p>
+        <p>UUID: ${obj.uuid}</p>
+      </div>`
+    container.insertAdjacentHTML('beforeend', string);
+})
