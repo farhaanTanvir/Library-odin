@@ -60,8 +60,6 @@ const pagecountInput = document.getElementById('pagecount');
 const genreInput = document.getElementById('genre');
 
 
-
-
 openForm.addEventListener('click', () => {
     form.show();
 })
@@ -74,11 +72,18 @@ closeBtn.addEventListener('click', (event) => {
     form.close();
 })
 
+// REMOVE BUTTON
 
 const removeButtons = document.querySelectorAll('.removebtn');
 
+removeButtons.forEach((button) => {
+    button.addEventListener('click', removeEventCallback);
+})
+
 function removeEventCallback(e) {
     e.preventDefault();
+    e.stopPropagation();
+    if (removeButtons.length === 0) { return }
     console.log("EVENT STILL HERE!");
     const targetUUID = "" + e.target.id;
     let targetIndex = null;
@@ -88,15 +93,18 @@ function removeEventCallback(e) {
         }
     })
     myLibrary.splice(targetIndex, 1);
+    removeButtons.forEach((button) => {
+        button.removeEventListener('click', removeEventCallback);
+    })
     container.innerHTML = "";
     displayBooks();
-}
-
-if (removeButtons.length !== 0) {
-    removeButtons.forEach((button) => {
-        button.addEventListener('click', removeEventCallback)
+    const removeButtons2 = document.querySelectorAll('.removebtn');
+    removeButtons2.forEach((button) => {
+        button.addEventListener('click', removeEventCallback);
     })
 }
 
-/// come back to fix only one item being deleted. The event listener has disappeared, so figure out how to fix that.
+// ADDING NEW BOOKS THROUGH THE ADD BOOK BUTTON BREAKS THE MECHANISM AGAIN. FIX THAT. Easier fix would be automating the remove event listeners altogether, having them being drawn the moment items are drawn. perhaps inside displayBooks. Or just ditch the whole thing and use delegation man
+
+
 

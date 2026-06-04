@@ -1,0 +1,2 @@
+For the function of removing a book, I have used a method, which attaches event listeners then removes them 10 times per click and once again attaches it 10 times per click because buttons are being redrawn. at Scale it will become a problem. It's fine and it works for now sure, but in the future you'll have to do better. 
+so when I find free time, I should come and replace the book removal mechanism USING EVENT DELEGATION. It's harder but more efficient and scalable! Good for becoming better than the competetion (competetion is very tight, remember)
