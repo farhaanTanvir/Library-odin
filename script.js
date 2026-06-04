@@ -41,6 +41,7 @@ function displayBooks() {
         <p>Page Count: ${obj.pageCount}</p>
         <p>Genre: ${obj.genre}</p>
         <p>UUID: ${obj.uuid}</p>
+        <button class="removebtn" id="${obj.uuid}">REMOVE</button>
       </div>`
         container.insertAdjacentHTML('beforeend', string);
     })
@@ -60,6 +61,7 @@ const genreInput = document.getElementById('genre');
 
 
 
+
 openForm.addEventListener('click', () => {
     form.show();
 })
@@ -72,4 +74,29 @@ closeBtn.addEventListener('click', (event) => {
     form.close();
 })
 
+
+const removeButtons = document.querySelectorAll('.removebtn');
+
+function removeEventCallback(e) {
+    e.preventDefault();
+    console.log("EVENT STILL HERE!");
+    const targetUUID = "" + e.target.id;
+    let targetIndex = null;
+    myLibrary.forEach((obj, index) => {
+        if (obj.uuid === targetUUID) {
+            targetIndex = index;
+        }
+    })
+    myLibrary.splice(targetIndex, 1);
+    container.innerHTML = "";
+    displayBooks();
+}
+
+if (removeButtons.length !== 0) {
+    removeButtons.forEach((button) => {
+        button.addEventListener('click', removeEventCallback)
+    })
+}
+
+/// come back to fix only one item being deleted. The event listener has disappeared, so figure out how to fix that.
 

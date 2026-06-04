@@ -21,7 +21,12 @@ body {
     font-size: 1.30rem;
     font-family: sans-serif;
     font-weight: bold;
-    height: 300px
+    height: 350px;
+}
+
+.card button {
+    padding: 15px 25px;
+    font-size: 1.1rem;
 }
 
 #addBook {
