@@ -10,6 +10,7 @@ function Book(title, author, publisher, pagecount, genre) {
     this.uuid = self.crypto.randomUUID();
 }
 
+
 function addBookToLibrary(title, author, publisher, pagecount, genre) {
     myLibrary.push(new Book(title, author, publisher, pagecount, genre));
 }
@@ -30,8 +31,10 @@ console.log(myLibrary);
 
 const container = document.getElementById('container');
 
-myLibrary.forEach((obj) => {
-    const string = `<div class="card">
+
+function displayBooks() {
+    myLibrary.forEach((obj) => {
+        const string = `<div class="card">
         <p>${obj.title}</p>
         <p>Author: ${obj.author}</p>
         <p>Publisher: ${obj.publisher}</p>
@@ -39,5 +42,34 @@ myLibrary.forEach((obj) => {
         <p>Genre: ${obj.genre}</p>
         <p>UUID: ${obj.uuid}</p>
       </div>`
-    container.insertAdjacentHTML('beforeend', string);
+        container.insertAdjacentHTML('beforeend', string);
+    })
+}
+
+displayBooks();
+
+const openForm = document.querySelector('#addBook');
+const form = document.querySelector('dialog');
+const closeBtn = document.querySelector('#close');
+
+const titleInput = document.getElementById('title');
+const authorInput = document.getElementById('author');
+const publisherInput = document.getElementById('publisher');
+const pagecountInput = document.getElementById('pagecount');
+const genreInput = document.getElementById('genre');
+
+
+
+openForm.addEventListener('click', () => {
+    form.show();
 })
+
+closeBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    myLibrary.push(new Book(titleInput.value, authorInput.value, publisherInput.value, pagecountInput.value, genreInput.value));
+    container.innerHTML = "";
+    displayBooks();
+    form.close();
+})
+
+

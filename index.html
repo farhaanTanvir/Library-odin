@@ -7,6 +7,40 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <button id="addBook">ADD A BOOK</button>
+    <dialog>
+        <form>
+    <div>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required>
+    </div>
+
+    <div>
+        <label for="author">Author:</label>
+        <input type="text" id="author" name="author" required>
+    </div>
+
+    <div>
+        <label for="publisher">Publisher:</label>
+        <input type="text" id="publisher" name="publisher">
+    </div>
+
+    <div>
+        <label for="pagecount">Page Count:</label>
+        <input type="number" id="pagecount" name="pagecount" min="1">
+    </div>
+
+    <div>
+        <label for="genre">Genre:</label>
+        <input type="text" id="genre" name="genre">
+    </div>
+
+    <div>
+        <button id="close" type="submit">Submit</button>
+    </div>
+</form>
+    </dialog>
+
     <div class="boxContainer" id="container">
       <!-- <div class="card">
         <p>Harry Potter and the Philosopher's Stone</p>
@@ -16,7 +50,6 @@
         <p>Genre: Fantasy</p>
         <p>UUID: 5ead3e76-bbe2-4ffa-851b-e827c8a6a869</p>
       </div> -->
-
     </div>
     <script src="script.js"></script>
 </body>

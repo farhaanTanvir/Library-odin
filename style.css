@@ -17,9 +17,86 @@ body {
 
 .card {
     padding: 30px 50px;
-    background-color: rgb(179, 175, 175);
+    background-color: rgb(221, 215, 215);
     font-size: 1.30rem;
     font-family: sans-serif;
     font-weight: bold;
     height: 300px
+}
+
+#addBook {
+    margin-left: 50px;
+    margin-top: 30px;
+    font-weight: bold;
+    font-size: 1.3rem;
+    padding: 15px 30px;
+    margin-bottom: -10px;
+    background-color: rgb(221, 215, 215);
+    border: none;
+    border-radius: 5px;
+}
+
+
+
+
+form {
+    width: 400px;
+    margin: 0 auto;
+    font-family: system-ui, -apple-system, sans-serif;
+    color: #333;
+    padding: 10px;
+}
+
+
+form div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+label {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+
+input[type="text"],
+input[type="number"] {
+    padding: 12px 15px;
+    font-size: 1.3rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+
+input:focus {
+    border-color: #0066cc;
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.15);
+}
+
+
+form div:last-child {
+    margin-bottom: 0;
+    margin-top: 16px;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 20px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #fff;
+    background-color: #0066cc;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button[type="submit"]:hover {
+    background-color: #0052a3;
 }
