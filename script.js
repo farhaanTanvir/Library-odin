@@ -1,4 +1,6 @@
-let myLibrary = []
+let myLibrary = [];
+
+
 
 function Book(title, author, publisher, pagecount, genre) {
     this.title = title
@@ -8,8 +10,19 @@ function Book(title, author, publisher, pagecount, genre) {
     this.genre = genre
     // maybe add a "synopsis" one, which is a short summary basically, if you're feeling fancy
     this.uuid = self.crypto.randomUUID();
+    this.read = false;
 }
 
+
+Book.prototype.toggleRead = function () {
+    if (this.read === false) {
+        this.read = true;
+
+    } else if (this.read === true) {
+        this.read = false;
+
+    }
+}
 
 function addBookToLibrary(title, author, publisher, pagecount, genre) {
     myLibrary.push(new Book(title, author, publisher, pagecount, genre));
@@ -32,19 +45,27 @@ console.log(myLibrary);
 const container = document.getElementById('container');
 
 
+
 function displayBooks() {
+    let readStatus = null;
+
     myLibrary.forEach((obj) => {
-        const string = `<div class="card">
+        if (obj.read) { readStatus = "read" } else if (!obj.read) { readStatus = "unread" }
+
+        const string = `<div id="card" class=${readStatus}>
         <p>${obj.title}</p>
         <p>Author: ${obj.author}</p>
         <p>Publisher: ${obj.publisher}</p>
         <p>Page Count: ${obj.pageCount}</p>
         <p>Genre: ${obj.genre}</p>
         <p>UUID: ${obj.uuid}</p>
-        <button class="removebtn" id="${obj.uuid}">REMOVE</button>
+        <button class="removebtn" data-uuid="${obj.uuid}">REMOVE</button>
+        <button class="readbtn" data-uuid="${obj.uuid}">Read</button>
       </div>`
         container.insertAdjacentHTML('beforeend', string);
     })
+
+
 }
 
 displayBooks();
@@ -72,39 +93,62 @@ closeBtn.addEventListener('click', (event) => {
     form.close();
 })
 
+
+
 // REMOVE BUTTON
 
-const removeButtons = document.querySelectorAll('.removebtn');
 
-removeButtons.forEach((button) => {
-    button.addEventListener('click', removeEventCallback);
+
+container.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (!e.target.classList.contains("removebtn")) {
+        return;
+    }
+    const targetUUID = e.target.dataset.uuid;
+    console.log(targetUUID);
+    let targetIndex = null;
+
+    myLibrary.forEach((obj, index) => {
+        if (obj.uuid === targetUUID) {
+
+            targetIndex = index;
+            console.log(index);
+            console.log(targetIndex);
+        }
+    })
+
+    myLibrary.splice(targetIndex, 1);
+    container.innerHTML = ""
+    displayBooks();
 })
 
-function removeEventCallback(e) {
+
+// TOGGLE READ STATUS
+
+
+container.addEventListener('click', (e) => {
     e.preventDefault();
-    e.stopPropagation();
-    if (removeButtons.length === 0) { return }
-    console.log("EVENT STILL HERE!");
-    const targetUUID = "" + e.target.id;
+    if (!e.target.classList.contains("readbtn")) {
+        return;
+    }
+
+    const targetUUID = e.target.dataset.uuid;
     let targetIndex = null;
+
     myLibrary.forEach((obj, index) => {
         if (obj.uuid === targetUUID) {
             targetIndex = index;
         }
     })
-    myLibrary.splice(targetIndex, 1);
-    removeButtons.forEach((button) => {
-        button.removeEventListener('click', removeEventCallback);
-    })
-    container.innerHTML = "";
+    myLibrary[targetIndex].toggleRead();
+    container.innerHTML = ""
     displayBooks();
-    const removeButtons2 = document.querySelectorAll('.removebtn');
-    removeButtons2.forEach((button) => {
-        button.addEventListener('click', removeEventCallback);
-    })
-}
+    // Using Green background to indicate read status
+})
 
-// ADDING NEW BOOKS THROUGH THE ADD BOOK BUTTON BREAKS THE MECHANISM AGAIN. FIX THAT. Easier fix would be automating the remove event listeners altogether, having them being drawn the moment items are drawn. perhaps inside displayBooks. Or just ditch the whole thing and use delegation man
+
+
+
 
 
 
