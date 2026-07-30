@@ -1,6 +1,9 @@
 let myLibrary = [];
 
 
+/* 
+
+(THIS IS OLD CONSTRUCTOR CODE)
 
 function Book(title, author, publisher, pagecount, genre) {
     this.title = title
@@ -8,11 +11,9 @@ function Book(title, author, publisher, pagecount, genre) {
     this.publisher = publisher
     this.pageCount = pagecount
     this.genre = genre
-    // maybe add a "synopsis" one, which is a short summary basically, if you're feeling fancy
     this.uuid = self.crypto.randomUUID();
     this.read = false;
-}
-
+} 
 
 Book.prototype.toggleRead = function () {
     if (this.read === false) {
@@ -23,6 +24,31 @@ Book.prototype.toggleRead = function () {
 
     }
 }
+
+*/
+
+class Book {
+    constructor(title, author, publisher, pagecount, genre) {
+        this.title = title
+        this.author = author
+        this.publisher = publisher
+        this.pageCount = pagecount
+        this.genre = genre
+        this.uuid = self.crypto.randomUUID();
+        this.read = false;
+    }
+
+    toggleRead() {
+        if (this.read === false) {
+            this.read = true;
+
+        } else if (this.read === true) {
+            this.read = false;
+
+        }
+    }
+}
+
 
 function addBookToLibrary(title, author, publisher, pagecount, genre) {
     myLibrary.push(new Book(title, author, publisher, pagecount, genre));
@@ -96,8 +122,6 @@ closeBtn.addEventListener('click', (event) => {
 
 
 // REMOVE BUTTON
-
-
 
 container.addEventListener('click', (e) => {
     e.preventDefault();
